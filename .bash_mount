@@ -1,0 +1,38 @@
+alias truecrypt='/Applications/TrueCrypt.app/Contents/MacOS/TrueCrypt'
+
+# Mount an encrypted volume, e.g.:
+#
+#   $ vol me
+#
+# This will mount /Volumes/me. If it contains a file named
+# .bashrc it will be sourced, also when new terminals are
+# opened.
+function vol() {
+  if [ ! -d /Volumes/"$1" ]; then
+    truecrypt --mount ~/.vols/"$1".vol /Volumes/"$1"
+    echo "Mounted volume: $1"
+    if [ -f /Volumes/"$1"/.bashrc ]; then
+        source /Volumes/"$1"/.bashrc
+    fi
+  fi
+}
+
+# Dismount an encrypted volume and back it up to Dropbox. E.g.:
+#
+#   $ volx me
+#
+function volx() {
+  if [ -d /Volumes/"$1" ]; then
+    truecrypt --dismount /Volumes/"$1"
+    cp ~/.vols/"$1".vol ~/Dropbox/"$1".vol/"$1".vol
+    echo "Dismounted volume: $1"
+  fi
+}
+
+# Source any .bashrc files found in the root of mounted volumes
+for i in /Volumes/*; do
+  if [ -f "$i"/.bashrc ] ; then
+    source "$i"/.bashrc
+  fi
+done
+

@@ -1,0 +1,24 @@
+function __bundler_ps1 {
+  if [ -n "${BUNDLE_GEMFILE-}" ]; then
+    project_path="${BUNDLE_GEMFILE%/Gemfile}"
+    project_name="${project_path##**/}"
+
+    if [ -n "${1-}" ]; then
+      printf "$1" "${project_name}"
+    else
+      printf " (%s)" "${project_name}"
+    fi
+  fi
+}
+
+function __rvm_ps1 {
+  if [ -n "${rvm_ruby_gem_home}" ]; then
+    printf "%s:" "$(rvm-prompt i g)"
+  fi
+}
+
+# <ruby>@<gemset>:<dir>(<git repo>)
+export PS1='\[\e[36m\]$(__bundler_ps1 "[%s] ")\[\e[0m\]\[\e[33m\]$(__rvm_ps1)\[\e[0m\]\w\[\e[35m\]$(__git_ps1 "(%s)")\[\e[0m\]$ '
+export PS2='> '    # Secondary prompt
+export PS3='#? '   # Prompt 3
+export PS4='+'     # Prompt 4	
