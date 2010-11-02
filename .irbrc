@@ -11,10 +11,10 @@ IRB.conf[:AUTO_INDENT]=true
 
 require 'pp'
 
-# require 'rubygems'
-# require 'wirble'
-# Wirble.init
-# Wirble.colorize
+require 'rubygems'
+require 'wirble'
+Wirble.init
+Wirble.colorize
 
 # http://ozmm.org/posts/time_in_irb.html
 def time(times = 1)
@@ -43,12 +43,12 @@ if ENV.include?('RAILS_ENV') && !Object.const_defined?('RAILS_DEFAULT_LOGGER')
   Object.const_set('RAILS_DEFAULT_LOGGER', Logger.new(STDOUT))
 end
 
-def login(email, pwd)
-  Authlogic::Session::Base.controller = Authlogic::TestCase::MockController.new
-  us = UserSession.new(:email => email, :password => pwd)
-  us.save!
-  UserSession.find
-end
+# def login(email, pwd)
+#   Authlogic::Session::Base.controller = Authlogic::TestCase::MockController.new
+#   us = UserSession.new(:email => email, :password => pwd)
+#   us.save!
+#   UserSession.find
+# end
 
 # reload this .irbrc
 def IRB.reload

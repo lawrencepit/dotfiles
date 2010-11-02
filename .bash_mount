@@ -1,3 +1,7 @@
+#
+# Mounts truecrypted volumes. See http://www.truecrypt.org/
+#
+
 alias truecrypt='/Applications/TrueCrypt.app/Contents/MacOS/TrueCrypt'
 
 # Mount an encrypted volume, e.g.:
