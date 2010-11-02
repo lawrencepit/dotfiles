@@ -14,7 +14,7 @@ alias truecrypt='/Applications/TrueCrypt.app/Contents/MacOS/TrueCrypt'
 function vol() {
   if [ ! -d /Volumes/"$1" ]; then
     truecrypt --mount ~/.vols/"$1".vol /Volumes/"$1"
-    echo "Mounted volume: $1"
+    echo "Mounted volume: /Volumes/$1"
     if [ -f /Volumes/"$1"/.bashrc ]; then
         source /Volumes/"$1"/.bashrc
     fi
@@ -29,7 +29,7 @@ function volx() {
   if [ -d /Volumes/"$1" ]; then
     truecrypt --dismount /Volumes/"$1"
     cp ~/.vols/"$1".vol ~/Dropbox/"$1".vol/"$1".vol
-    echo "Dismounted volume: $1"
+    echo "Dismounted volume: /Volumes/$1"
   fi
 }
 

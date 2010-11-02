@@ -1,5 +1,3 @@
-require 'fileutils'
-
 # Files and folders which shouldn't be copied over
 EXCLUDE = [
   '.git',
