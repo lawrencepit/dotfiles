@@ -1,0 +1,16 @@
+# Configuration of private data.
+# Any ruby code can be used.
+# Any instance variable or ruby method defined here can be
+# called from an erb template. Below are examples.
+
+@gemcutter_key = "your-gemcutter-key"
+
+def name
+  "Lawrence Pit"
+end
+
+def email
+  "lawrence.pit@gmail.com"
+end
+alias :gmail :email
+

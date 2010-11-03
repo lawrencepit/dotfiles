@@ -24,13 +24,6 @@ export PATH=$PATH:$EC2_HOME/bin:$AWS_RDS_HOME/bin
 
 export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/Current/Commands/java_home`
 
-export DYLD_LIBRARY_PATH="/opt/oracle/instantclient_10_2"
-export ORACLE_HOME="/opt/oracle/instantclient_10_2"
-export SQLPATH="/opt/oracle/instantclient_10_2"
-export TNS_ADMIN="/opt/oracle/network/admin"
-export NLS_LANG="AMERICAN_AMERICA.UTF8"
-export PATH=$PATH:$ORACLE_HOME
-
 if [ -f ~/.bash_completion ]; then
     . ~/.bash_completion
 fi
