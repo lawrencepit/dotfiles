@@ -12,7 +12,12 @@ EXCLUDE = [
   'README.textile'
 ]
 
-# See .dotfiles_conf
+# Files that should be copied
+def files
+  @files ||= Dir['**/{.*,*}'].reject {|f| f =~ /\.$/ || File.directory?(f) } - EXCLUDE
+end
+
+# See file Dotfile
 class Dotfiles
   @@conf = Dotfiles.new
   def self.conf ; @@conf ; end
@@ -23,11 +28,6 @@ class Dotfiles
   def method_missing(method, *args, &block)
     instance_variable_get(:"@#{method}") || "Enter your #{method}"
   end
-end
-
-# Files that should be copied
-def files
-  @files ||= Dir['**/{.*,*}'].reject {|f| f =~ /\.$/ || File.directory?(f) } - EXCLUDE
 end
 
 # Copy file to target. If it's an .erb file evaluate it first.
