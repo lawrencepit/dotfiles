@@ -20,7 +20,8 @@ bind "set show-all-if-ambiguous On" # this allows you to automatically show comp
 export EC2_DIR=~/.ec2
 export EC2_HOME=$EC2_DIR/tools
 export AWS_RDS_HOME=~/.rds/tools
-export PATH=$PATH:$EC2_HOME/bin:$AWS_RDS_HOME/bin 
+export AWS_IAM_HOME=~/.iam/tools
+export PATH=$PATH:$EC2_HOME/bin:$AWS_RDS_HOME/bin:$AWS_IAM_HOME/bin
 
 export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/Current/Commands/java_home`
 
