@@ -1,0 +1,3 @@
+#!/bin/sh
+# Usage: b64decode <file>
+perl -MMIME::Base64 -ne 'print decode_base64($_)' < $1
