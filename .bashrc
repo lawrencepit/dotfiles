@@ -49,3 +49,6 @@ fi
 if [ -f ~/.rvm/scripts/rvm ]; then
   . ~/.rvm/scripts/rvm
 fi
+
+# Kick of executing .rvmrc
+cd .. ; cd -
