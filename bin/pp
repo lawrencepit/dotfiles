@@ -1,0 +1,11 @@
+#!/usr/local/bin/ruby
+require 'rubygems'
+require 'json'
+
+body = gets.strip
+
+if body =~ /\A(\{|\[)/
+  puts JSON.pretty_generate(JSON.parse(body))
+else
+  puts body
+end
