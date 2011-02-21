@@ -26,6 +26,8 @@ alias ..3='cd ../../..'
 alias ..4='cd ../../../..'
 alias ls='ls -G' 
 alias ll='ls -lah'
+alias lx='ls -X'
+alias ld='ls -d */'
 alias pg='ps aux | grep'
 
 alias sc='script/console'

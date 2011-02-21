@@ -43,6 +43,15 @@ if ENV.include?('RAILS_ENV') && !Object.const_defined?('RAILS_DEFAULT_LOGGER')
   Object.const_set('RAILS_DEFAULT_LOGGER', Logger.new(STDOUT))
 end
 
+def go(person = Person.find(5))
+  UserSession.assume(person, "127.0.0.1")
+end
+
+def ppp(object)
+  require 'json'
+  puts JSON.pretty_generate(JSON.parse(object.to_json))
+end
+
 # def login(email, pwd)
 #   Authlogic::Session::Base.controller = Authlogic::TestCase::MockController.new
 #   us = UserSession.new(:email => email, :password => pwd)
