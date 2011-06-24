@@ -1,3 +1,5 @@
+alias wget='curl -L -O'
+
 alias gems='cd $GEM_HOME'
 
 alias b='bundle exec bash'
