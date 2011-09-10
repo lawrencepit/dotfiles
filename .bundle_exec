@@ -1,4 +1,4 @@
-BUNDLED_COMMANDS="cucumber rackup rails rake ruby spec unicorn unicorn_rails"
+BUNDLED_COMMANDS="cucumber rackup rails rake ruby rspec spec unicorn unicorn_rails"
 
 ## Functions
 

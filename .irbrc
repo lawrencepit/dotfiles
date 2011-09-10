@@ -55,6 +55,25 @@ def ppp(object)
   puts JSON.pretty_generate(JSON.parse(object.to_json))
 end
 
+def c
+  puts caller.reverse.map.with_index{ |m, i|
+    m.rindex( /:\d+(:in `(.*)')?$/ )
+    "  "*i + $2
+  }
+end
+alias cc c
+
+def o(desc = nil)
+  caller[0].rindex( /:(\d+)(:in (`.*'))?$/ )
+  m = $3 ? "method #$3, " : ""
+  d = desc ? "#{desc}: r" : 'R'
+
+  # lol, I need to change the syntax highlighter...
+  # the "syntax" gem *crashed* when I wrote "#$`"
+  puts "#{d}eached #{m}line #{$1} of file #{$`}"
+end
+alias oo o
+
 # reload this .irbrc
 def IRB.reload
   load __FILE__

@@ -1,0 +1,47 @@
+#!/usr/bin/ruby
+#
+# Usage: imgconvert [--people] <directory>
+#
+# Convert all images from the given directory into 32x32 and 48x48 images
+# and puts them in /_medium resp. /_large subdirectories
+# under the given directory.
+#
+# If the --people is provided it is assumed all images are faces of people
+# which require a slightly different way of image processing.
+#
+
+THUMB_DIMENSIONS = { :large => 48, :medium => 32 }
+
+def convert_images(image_dir, people = true)
+  THUMB_DIMENSIONS.keys.each { |format, _| system("mkdir -p #{image_dir}/_#{format}") }
+
+  Dir["#{image_dir}/*.*"].each do |original_filename|
+    extension = File.extname(original_filename)
+    target = original_filename.sub(/#{extension}$/, '')
+    target_dir = File.dirname(target)
+    filename = target.sub(target_dir+"/", '')
+
+    THUMB_DIMENSIONS.each do |format, dimension|
+      options = if people
+        "-resize '#{dimension}x#{dimension}^' -strip -gravity center -extent #{dimension}x#{dimension}"
+      else
+        "-resize #{dimension}x#{dimension} -strip -gravity center -extent #{dimension}x#{dimension}"
+      end
+      system("convert '#{original_filename}' #{options} '#{target_dir}/_#{format}/#{filename}.png'")
+    end
+  end
+end
+
+people, dir = ARGV[0], ARGV[1]
+dir, people = people, nil if dir.nil?
+if dir
+  image_dir = File.expand_path(dir)
+  if File.directory?(image_dir)
+    convert_images(image_dir, people)
+  else
+    puts "Not a valid directory: #{dir}"
+  end
+else
+  puts "Usage: imgconvert [--people] <directory>"
+end
+
