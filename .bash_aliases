@@ -41,8 +41,8 @@ alias pg='ps aux | grep'
 alias rc='rails c'
 alias rs='unicorn_rails'
 alias rdb='rails db'
-alias rt='reetest ; bundle exec rake RAILS_ENV=test spec ; reedev '
-alias rq='rake cucumber'
+alias rt='reetest ; bundle exec rake RAILS_ENV=test spec ; reedev'
+alias rq='reetest ; bundle exec rake cucumber ; reedev'
 alias tf='tail -f log/development.log'
 
 alias gi='grep -i'  #case insensitive grep
