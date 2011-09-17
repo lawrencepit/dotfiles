@@ -1,5 +1,5 @@
 
-for file in exports functions bash_completion bash_prompt bash_aliases bash_mount bundle_exec reerc; do
+for file in exports functions bash_completion bash_prompt bash_aliases truecrypt bundle_exec reerc; do
   file="$HOME/.$file"
   [ -e "$file" ] && source "$file"
 done
