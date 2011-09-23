@@ -1,0 +1,22 @@
+To only turn off indexing on a volume: 
+sudo mdutil -i off /Volume/drivename/ 
+
+To Turn off indexing and remove indices on a volume: 
+sudo mdutil -E -i off /Volumes/drivename/ 
+
+To only turn on indexing on a volume: 
+sudo mdutil -i on /Volumes/drivename/ 
+
+To turn on indexing and rebuild indices on a volume: 
+sudo mdutil -E -i on /Volumes/drivename/ 
+
+To only force rebuilding of indices on a volume: 
+sudo mdutil -E /Volumes/drivename
+
+Disable Spotlight from the menu bar
+sudo chmod 0 /System/Library/CoreServices/Search.bundle
+Then manually go to Activity Monitor and force quit SystemUIServer
+
+Enable Spotlight from the menu bar
+sudo chmod 755 /System/Library/CoreServices/Search.bundle
+Then manually go to Activity Monitor and force quit SystemUIServer
