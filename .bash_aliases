@@ -79,5 +79,7 @@ alias spoton="sudo mdutil -a -i on"
 for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do alias "$method"="curl -X $method -H \"Accept: application/json\""; done
 
 # http://mikeferrier.ca/2011/04/04/setting-up-wildcard-dns-on-localhost-domains-on-osx/
+# see /var/named
+alias checkdns='sudo named-checkconf /etc/named.conf ; sudo named-checkzone local /var/named/local.zone'
 alias reloaddns='sudo rndc -p 54 reload ; dscacheutil -flushcache'
 
