@@ -9,5 +9,5 @@ if [ -f ~/.rvm/scripts/rvm ]; then
   . ~/.rvm/scripts/rvm
 fi
 
-# Kick of executing .rvmrc
+# Kick off executing .rvmrc
 cd .. ; cd -

@@ -2,6 +2,8 @@ export PATH=~/bin:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin:
 
 export MANPATH=/opt/local/share/man
 
+export ARCHFLAGS="-arch x86_64"
+
 # Make mate the default editor
 export EDITOR="mate -w"
 export CVSEDITOR="mate -w"
