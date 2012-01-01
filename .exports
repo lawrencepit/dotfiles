@@ -42,3 +42,8 @@ export HISTIGNORE="ls:ls *"
 export HISTCONTROL=erasedups
 # Save and reload history after each command
 #export PROMPT_COMMAND="history -a; history -r; $PROMPT_COMMAND"
+
+# Apple is shipping a buggy compiler as of XCode 4.2
+export CC=gcc-4.2
+export CXX=g++-4.2
+
