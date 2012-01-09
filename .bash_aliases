@@ -45,6 +45,7 @@ alias mt='reetest ; bundle exec rake db:migrate:reset ; bundle exec rake spec ; 
 alias rt='reetest ; bundle exec rake RAILS_ENV=test spec > log/test.stdout.log ; reedev'
 alias rq='reetest ; bundle exec rake cucumber > log/cucumber.stdout.log ; reedev'
 alias tf='tail -f log/development.log'
+alias tt='tail -f log/test.stdout.log'
 
 # Backup all mysql databases
 # Use --single-transaction when using InnoDB only to minimize locking time.
