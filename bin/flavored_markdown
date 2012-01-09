@@ -1,0 +1,81 @@
+#!/usr/bin/env ruby
+# Usage: flavored_markdown [<file>...]
+# Convert one or more Markdown files to HTML and write to standard output. With
+# no <file> or when <file> is '-', read Markdown source text from standard input.
+if ARGV.include?('--help')
+  File.read(__FILE__).split("\n").grep(/^# /).each do |line|
+    puts line[2..-1]
+  end
+  exit 0
+end
+
+require 'rubygems'
+require 'redcarpet'
+require 'pygments.rb'
+
+class HTMLwithPygments < Redcarpet::Render::HTML
+  include Redcarpet::Render::SmartyPants
+
+  def block_code(code, language)
+    if language
+      render_pygments(code, language)
+    else
+      %[<pre class="bare"><code>#{code}</code></pre>]
+    end
+  end
+
+  def raw_html(raw_html)
+    raw_html =~ /\<\/?(b|i|em)\b/ ? raw_html : h(raw_html)
+  end
+
+  private
+    def render_pygments(code_string, language)
+      liners,source = "",""
+      code_array = code_string.strip.split("\n")
+      total_lines = code_array.size
+
+      total_lines.times do |ln|
+        liners += %[<span id="L#{ln+1}" rel="#L#{ln+1}">#{ln+1}</span>\n]
+      end
+
+      code_array.each_with_index do |line,i|
+        code_line = Pygments.highlight(line, :lexer => language, :options => {:encoding => 'utf-8'})
+        code_line.gsub!(/<div class="highlight"><pre>|\n<\/pre>|\n<\/div>/,'')
+        code_line.gsub!(/^([ ])+/){|m| "&nbsp;"*m.size}
+        code_line = "<br/>" if code_line.strip==''
+        source += %[<div class="line" id="LC#{i+1}">#{code_line}</div>]
+      end
+
+      output = <<-OUTPUT
+<div class='block-code type-#{language}'>
+  <table cellpadding='0' cellspacing='0'>
+    <tr>
+      <td><pre class="line_numbers">#{liners}</pre></td>
+      <td width="100%"><div class="highlight"><pre>#{source}</pre></div></td>
+    </tr>
+  </table>
+</div>
+      OUTPUT
+    end
+
+end
+
+# See https://github.com/blog/832-rolling-out-the-redcarpet
+# See https://github.com/tanoku/redcarpet
+MARKDOWN = Redcarpet::Markdown.new(HTMLwithPygments.new({
+    :filter_html => true,
+    :no_styles => true,
+    :safe_links_only => true,
+    :with_toc_data => true,
+    :hard_wrap => true
+  }), {
+    :autolink => true,
+    :space_after_headers => true,
+    :fenced_code_blocks => true,
+    :no_intra_emphasis => true,
+    :tables => true,
+    :superscript => true,
+    :lax_html_blocks => true
+})
+
+STDOUT.write(MARKDOWN.render(ARGF.read))

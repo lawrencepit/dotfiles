@@ -2,4 +2,5 @@ source :gemcutter
 source :rubygems
 
 gem 'rake'
-gem 'RedCloth'
+gem 'redcarpet'
+gem 'pygments.rb'

@@ -1,0 +1,207 @@
+#!/bin/bash
+
+function debug() {
+  echo "$@" 1>&2
+}
+
+f=$1
+if [ -z "$f" ] || [ "$f" = "-" ] ; then
+  f=/tmp/md-$$.txt
+  cat > $f
+  trap "rm -f $f" 0
+fi
+
+bn=$(basename $f | sed 's:^\(.*\)\.md$:\1:')
+html_file="/tmp/$bn-md.html"
+cat <<EOF > $html_file
+<html>
+  <head>
+  <title>$f</title>
+  <style type="text/css">
+    body {
+      font: 13.34px helvetica,arial,freesans,clean,sans-serif;
+      line-height: 1.4;
+    }
+    div#container {
+      max-width:  920px;
+      margin:     4em auto;
+      text-align: left;
+      padding: 3px;
+      background: #EEE;
+      border-radius: 3px;
+      -moz-border-radius: 3px;
+      -webkit-border-radius: 3px;
+    }
+    .markdown-body {
+      background-color: #fff;
+      padding: 30px;
+      border: 1px solid #CACACA;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .markdown-body > :first-child {
+      margin-top: 0 !important;
+    }
+    hr {
+      border: 0px;
+      background-color: #aaa;
+      height: 1px;
+      margin-top: 18pt;
+      margin-bottom: 18pt;
+    }
+    pre, code {
+      font: 12px 'Bitstream Vera Sans Mono','Courier',monospace;
+      line-height: 18px;
+    }
+    code {
+      background-color: #f8f8f8;
+      color: #222;
+      margin: 0 2px;
+      padding: 1px 4px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      -moz-border-radius: 3px;
+      -webkit-border-radius: 3px;
+    }
+    pre.bare {
+      margin: 1em 0;
+      background-color: #f8f8f8;
+      border: 1px solid #ccc;
+      padding: 6px 10px;
+      color: #222;
+      overflow: auto;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      border-radius: 3px;
+    }
+    pre.bare code {
+      padding: 0;
+      background-color: #f8f8f8;
+      border: none;
+    }
+
+    .block-code {
+      padding: 0;
+      margin: 0;
+      font-size: 80%;
+      font-family: 'Bitstream Vera Sans Mono','Courier',monospace;
+      font-size: 12px;
+      line-height: 14px;
+      color: #000;
+      overflow: auto;
+      border-radius: 3px;
+      margin: 1em 0;
+      background-color: ghostWhite;
+      border: 1px solid #DEDEDE;
+    }
+    .block-code .highlight {
+      padding: 1em 0;
+      //background-color: #fff;
+    }
+    .block-code .highlight div {
+      padding-left: 12px;
+    }
+    .block-code .line_numbers {
+      background-color: #ececec;
+      color: #aaa;
+      padding: 12px 6px;
+      border-right: 1px solid #ddd;
+      text-align: right;
+    }
+    .block-code .line_numbers span {
+      color: #aaa;
+      cursor: pointer;
+    }
+    .block-code pre {
+      margin: 0;
+    }
+    .block-code table {
+      table-layout: auto;
+      border-collapse: separate;
+      border-color: gray;
+    }
+    .block-code tbody td {
+      padding: 0;
+    }
+    .block-code tbody td:first-child {
+      background-color: #ECECEC;
+    }
+
+    /* .highlight { */
+      .hll { background-color: #ffffcc; }
+      .c { color: #408080; font-style: italic; } /* Comment */
+      .err { color: #A61717; background-color: #E3D2D2; } /* Error */
+      .k { color: #000; font-weight: bold; } /* Keyword */
+      .o { color: #666666; } /* Operator */
+      .cm { color: #408080; font-style: italic; } /* Comment.Multiline */
+      .cp { color: #BC7A00; } /* Comment.Preproc */
+      .c1 { color: #998; font-style: italic; } /* Comment.Single */
+      .cs { color: #408080; font-style: italic; } /* Comment.Special */
+      .gd { color: #A00000; } /* Generic.Deleted */
+      .ge { font-style: italic; } /* Generic.Emph */
+      .gr { color: #FF0000; } /* Generic.Error */
+      .gh { color: #000080; font-weight: bold; } /* Generic.Heading */
+      .gi { color: #00A000; } /* Generic.Inserted */
+      .go { color: #808080; } /* Generic.Output */
+      .gp { color: #000080; font-weight: bold; } /* Generic.Prompt */
+      .gs { font-weight: bold; } /* Generic.Strong */
+      .gu { color: #800080; font-weight: bold; } /* Generic.Subheading */
+      .gt { color: #0040D0; } /* Generic.Traceback */
+      .kc { color: #008000; font-weight: bold; } /* Keyword.Constant */
+      .kd { color: #000000; font-weight: bold; } /* Keyword.Declaration */
+      .kn { color: #008000; font-weight: bold; } /* Keyword.Namespace */
+      .kp { color: #008000; } /* Keyword.Pseudo */
+      .kr { color: #008000; font-weight: bold; } /* Keyword.Reserved */
+      .kt { color: #B00040; } /* Keyword.Type */
+      .m { color: #666666; } /* Literal.Number */
+      .s { color: #BA2121; } /* Literal.String */
+      .na { color: #7D9029; } /* Name.Attribute */
+      .nb { color: #008000; } /* Name.Builtin */
+      .nc { color: #0000FF; font-weight: bold; } /* Name.Class */
+      .no { color: #880000; } /* Name.Constant */
+      .nd { color: #AA22FF; } /* Name.Decorator */
+      .ni { color: #999999; font-weight: bold; } /* Name.Entity */
+      .ne { color: #D2413A; font-weight: bold; } /* Name.Exception */
+      .nf { color: #0000FF; } /* Name.Function */
+      .nl { color: #A0A000; } /* Name.Label */
+      .nn { color: #0000FF; font-weight: bold; } /* Name.Namespace */
+      .nt { color: #008000; font-weight: bold; } /* Name.Tag */
+      .nv { color: #19177C; } /* Name.Variable */
+      .ow { color: #AA22FF; font-weight: bold; } /* Operator.Word */
+      .w { color: #bbbbbb; } /* Text.Whitespace */
+      .mf { color: #666666; } /* Literal.Number.Float */
+      .mh { color: #666666; } /* Literal.Number.Hex */
+      .mi { color: #666666; } /* Literal.Number.Integer */
+      .mo { color: #666666; } /* Literal.Number.Oct */
+      .sb { color: #BA2121; } /* Literal.String.Backtick */
+      .sc { color: #BA2121; } /* Literal.String.Char */
+      .sd { color: #BA2121; font-style: italic; } /* Literal.String.Doc */
+      .s2 { color: #BA2121; } /* Literal.String.Double */
+      .se { color: #BB6622; font-weight: bold; } /* Literal.String.Escape */
+      .sh { color: #BA2121; } /* Literal.String.Heredoc */
+      .si { color: #BB6688; font-weight: bold; } /* Literal.String.Interpol */
+      .sx { color: #008000; } /* Literal.String.Other */
+      .sr { color: #BB6688; } /* Literal.String.Regex */
+      .s1 { color: #BA2121; } /* Literal.String.Single */
+      .ss { color: #19177C; } /* Literal.String.Symbol */
+      .bp { color: #008000; } /* Name.Builtin.Pseudo */
+      .vc { color: #19177C; } /* Name.Variable.Class */
+      .vg { color: #19177C; } /* Name.Variable.Global */
+      .vi { color: #19177C; } /* Name.Variable.Instance */
+      .il { color: #666666; } /* Literal.Number.Integer.Long */
+    /* } */
+  </style>
+  <body>
+    <div id="container">
+      <div class="markdown-body">
+EOF
+cat $f | ./bin/flavored_markdown >> $html_file
+cat <<EOF >> $html_file
+      </div>
+    </div>
+  </body>
+</html>
+EOF
+rslt=$?
+[ $rslt != 0 ] && exit $rslt
+open $html_file
