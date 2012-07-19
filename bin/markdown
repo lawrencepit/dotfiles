@@ -195,7 +195,7 @@ cat <<EOF > $html_file
     <div id="container">
       <div class="markdown-body">
 EOF
-cat $f | ./bin/flavored_markdown >> $html_file
+cat $f | flavored_markdown >> $html_file
 cat <<EOF >> $html_file
       </div>
     </div>
