@@ -77,9 +77,12 @@ alias fs="stat -f \"%z bytes\""
 # ROT13-encode text. Works for decoding, too! ;)
 alias rot13='tr a-zA-Z n-za-mN-ZA-M'
 
-# Disable Spotlight
+# Disable/Enable Spotlight server
+alias spotsoff="sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist"
+alias spotson="sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist"
+
+# Disable/Enable Spotlight index
 alias spotoff="sudo mdutil -a -i off"
-# Enable Spotlight
 alias spoton="sudo mdutil -a -i on"
 
 for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do alias "$method"="curl -X $method -H \"Accept: application/json\""; done
