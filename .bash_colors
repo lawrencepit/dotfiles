@@ -1,5 +1,8 @@
 export CLICOLOR=1
 
+# See http://geoff.greer.fm/lscolors/
+export LSCOLORS=Exfxcxdxbxegedabagaca
+
 export COLOR_NC='\e[0m' # No Color
 export COLOR_WHITE='\e[1;37m'
 export COLOR_BLACK='\e[0;30m'
