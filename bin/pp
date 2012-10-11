@@ -1,11 +1,11 @@
-#!/opt/ree/bin/ruby
+#!/opt/ruby/bin/ruby
 require 'rubygems'
 require 'json'
 
 body = gets.strip
 
 if body =~ /\A(\{|\[)/
-  puts JSON.pretty_generate(JSON.parse(body))
+  jj JSON.parse(body)
 else
   puts body
 end
