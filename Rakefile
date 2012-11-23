@@ -31,7 +31,7 @@ class Dotfiles
 end
 
 # Copy file to target. If it's an .erb file evaluate it first.
-def install(file, target)
+def install_to_target(file, target)
   if File.extname(file) == '.erb'
     target = target.sub(/\.erb$/, '')
     template_data = ERB.new(IO.read(file)).result(Dotfiles.conf.getBinding)
@@ -45,10 +45,11 @@ end
 
 desc 'Backup previous dotfiles.'
 task :backup do
-  target_rootdir = FileUtils.mkdir_p( File.expand_path( File.join( '~' , '.dotfiles-backup', Time.now.to_s ) ) )
+  backup_dir = File.expand_path(File.join( '~' , '.dotfiles-backup', Time.now.strftime("%FT%H%M%S")))
+  target_rootdir = FileUtils.mkdir_p(backup_dir, :verbose => true )
   files.each do |file|
     source = File.expand_path( "~/#{file}" )
-    target = "#{target_rootdir}/#{file}"
+    target = "#{backup_dir}/#{file}"
     target_dir = File.dirname(target)
     FileUtils.mkdir_p(target_dir, :verbose => true) unless File.exists?(target_dir)
     FileUtils.cp_r(source, target, :verbose => true) if File.exists?(source)
@@ -67,7 +68,7 @@ task :install do
     target = File.expand_path( "~/#{file}" )
     target_dir = File.dirname(target)
     FileUtils.mkdir_p(target_dir, :verbose => true) unless File.exists?(target_dir)
-    install(file, target)
+    install_to_target(file, target)
   end
 end
 
