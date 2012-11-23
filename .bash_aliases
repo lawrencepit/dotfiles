@@ -2,7 +2,6 @@ alias wget='curl -L -O'
 
 # Shortcuts
 alias d="cd ~/Dropbox"
-alias g='cd ~/github'
 alias p="cd ~/projects"
 alias m="mate ."
 
@@ -10,6 +9,7 @@ alias b='bundle exec bash'
 alias be='bundle exec'
 alias gems='cd $GEM_HOME'
 
+alias g='git'
 alias ga='git add'
 alias gb='git branch'
 alias gba='git branch -a'
@@ -19,12 +19,13 @@ alias gdc='git diff --cached | mate'
 alias gs='git status'
 alias gl='git pull'
 alias gp='git push'
-alias gk='gitk --all'
-alias gx='gitx --all'
 alias gc='git checkout'
 alias gf='git fetch'
 alias gcl='git config --list'
 alias gundo="git push -f origin HEAD^:master"
+
+alias gk='gitk --all'
+alias gx='gitx --all'
 
 alias hg='history | grep'
 alias ..='cd ..'
