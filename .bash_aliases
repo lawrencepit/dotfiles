@@ -92,4 +92,5 @@ for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do alias "$method"="curl -
 # see /var/named
 alias checkdns='sudo named-checkconf /etc/named.conf ; sudo named-checkzone local /var/named/local.zone'
 alias reloaddns='sudo rndc -p 54 reload ; dscacheutil -flushcache'
+alias resolvers='scutil --dns'
 
