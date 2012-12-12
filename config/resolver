@@ -1,0 +1,4 @@
+# See http://serverfault.com/questions/22419/set-dns-server-on-os-x-even-when-without-internet-connection
+# put in /etc/resolver/local
+nameserver 127.0.0.1
+domain .
