@@ -28,6 +28,11 @@ class HTMLwithPygments < Redcarpet::Render::HTML
     raw_html =~ /\<\/?(b|i|em)\b/ ? raw_html : h(raw_html)
   end
 
+  ESCAPE_TABLE = { '&'=>'&amp;', '<'=>'&lt;', '>'=>'&gt;', '"'=>'&quot;', "'"=>'&#039;', }
+  def h(value)
+    value.to_s.gsub(/[&<>"]/) {|s| ESCAPE_TABLE[s] }
+  end
+
   private
     def render_pygments(code_string, language)
       liners,source = "",""

@@ -71,5 +71,5 @@ function ruby193_dev() {
   export RUBY_FREE_MIN=200000
 }
 
-ruby193_dev
+# ruby193_dev
 
