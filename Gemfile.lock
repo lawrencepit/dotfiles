@@ -1,15 +1,13 @@
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
-    blankslate (2.1.2.4)
-    ffi (1.0.11)
-    pygments.rb (0.2.4)
-      rubypython (~> 0.5.3)
-    rake (0.9.2.2)
-    redcarpet (2.0.1)
-    rubypython (0.5.3)
-      blankslate (>= 2.1.2.3)
-      ffi (~> 1.0.7)
+    posix-spawn (0.3.6)
+    pygments.rb (0.3.7)
+      posix-spawn (~> 0.3.6)
+      yajl-ruby (~> 1.1.0)
+    rake (10.0.3)
+    redcarpet (2.2.2)
+    yajl-ruby (1.1.0)
 
 PLATFORMS
   ruby

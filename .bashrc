@@ -7,7 +7,6 @@ done
 # brew install grc
 #source "`brew --prefix grc`/etc/grc.bashrc"
 
-# This must be the last sourced script
 if [ -f ~/.rvm/scripts/rvm ]; then
   . ~/.rvm/scripts/rvm
 fi

@@ -12,11 +12,19 @@ function __git_prompt {
 }
 
 function __rvm_ps1 {
-  printf "%s:" "$(rvm-prompt i g)"
+  # printf "%s:" "$(rvm-prompt i g)"
+  printf "%s:" "$(rvm-prompt)"
 }
 
 # <ruby>@<gemset>:<dir>(<git repo>)
-export PS1='\[\e[36m\]\[\e[0m\]\[\e[33m\]$(__rvm_ps1)\[\e[0m\]\w\[\e[35m\]$(__git_prompt)\[\e[0m\]$ '
+export PS1='\[\e[36m\]\[\e[0m\]\[\e[33m\]$(__rvm_ps1)\[\e[0m\]\w\[\e[35m\]$(__git_prompt)\[\e[0m\]\n∴ '
 export PS2='> '    # Secondary prompt
 export PS3='#? '   # Prompt 3
 export PS4='+'     # Prompt 4
+
+# Prefer rvm style prompt if present
+#if [ -f ~/.rvm/contrib/ps1_functions ]; then
+#  . ~/.rvm/contrib/ps1_functions
+#  ps1_set --prompt ∴
+#fi
+
