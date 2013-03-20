@@ -55,8 +55,9 @@
     dl = "!git ll -1"
     #diff last commit
     dlc = diff --cached HEAD^
+    #diff last n commits
+    dlcs = "!f() { git diff --cached HEAD~"$1"; }; f"
     dr = "!f() { git diff "$1"^.."$1"; }; f"
-    diffr  = "!f() { git diff "$1"^.."$1"; }; f"
     branch = branch -ra
 
     #reset commands
