@@ -1,0 +1,24 @@
+#!/bin/bash
+#
+# Script to unload and reload mDNS as it is a bit crappy in OS X
+#
+# As Apple points out, you might need to do this in the following situation:
+# "OS X keeps a local cache of resolved DNS queries for a time defined by
+# the DNS server, but sometimes it may be necessary to reset the cache
+# immediately and re-query a DNS server. For example, you might do this
+# after an entry on the server is changed or a new entry is added."
+#
+# Alternatively:
+#   sudo killall -HUP mDNSResponder
+#
+# Also if you run this command you will get a very detailed report
+# in /var/logs/system.log of the state of your cache etc.
+#   sudo killall -INFO mDNSResponder
+#
+sudo launchctl unload /System/Library/LaunchDaemons/com.apple.mDNSResponder.plist
+echo "mDNS unloaded"
+sleep 5
+sudo launchctl load /System/Library/LaunchDaemons/com.apple.mDNSResponder.plist
+echo "mDNS loaded"
+sleep 5
+echo "Hopefully you can get on with browsing again"

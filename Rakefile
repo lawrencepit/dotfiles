@@ -9,7 +9,7 @@ EXCLUDE = [
   'Gemfile',
   'Gemfile.lock',
   'Rakefile',
-  'README.textile'
+  'README.md'
 ]
 
 # Files that should be copied

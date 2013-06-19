@@ -28,7 +28,8 @@ function vol() {
 function volx() {
   if [ -d /Volumes/"$1" ]; then
     truecrypt --dismount /Volumes/"$1"
-    cp ~/.vols/"$1".vol ~/Dropbox/"$1".vol/"$1".vol
+    cp ~/.vols/"$1".vol ~/Dropbox/Mobile/Volumes/"$1".vol/"$1".vol
+    rm ~/.bash_history
     echo "Dismounted volume: /Volumes/$1"
   fi
 }

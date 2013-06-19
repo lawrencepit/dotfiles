@@ -64,6 +64,11 @@ alias profileme="history | awk '{print \$2}' | awk 'BEGIN{FS=\"|\"}{print \$1}' 
 
 alias ssha='eval `ssh-agent` ; ssh-add'
 
+alias memstat='echo stats | nc 127.0.0.1 11211'
+alias memflush='echo flush_all | nc 127.0.0.1 11211'
+
+alias ch='rm ~/.bash_history ; history -c ; clear'
+
 # IP addresses
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip="ipconfig getifaddr en1"
@@ -92,6 +97,6 @@ for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do alias "$method"="curl -
 # http://mikeferrier.ca/2011/04/04/setting-up-wildcard-dns-on-localhost-domains-on-osx/
 # see /var/named
 alias checkdns='sudo named-checkconf /etc/named.conf ; sudo named-checkzone local /var/named/local.zone'
-alias reloaddns='sudo rndc -p 54 reload ; dscacheutil -flushcache'
+alias reloaddns='sudo rndc -p 54 reload ; dscacheutil -flushcache ; cleardns'
 alias resolvers='scutil --dns'
 

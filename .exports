@@ -34,7 +34,7 @@ export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/Current/C
 export MANPAGER="less -X"
 
 # Larger bash history (default is 500)
-export HISTSIZE=1024
+export HISTSIZE=250
 export HISTFILESIZE=$HISTSIZE
 # Format history
 export HISTTIMEFORMAT="| %F %I:%M%p | "
