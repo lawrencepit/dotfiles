@@ -7,7 +7,5 @@ done
 # brew install grc
 #source "`brew --prefix grc`/etc/grc.bashrc"
 
-if [ -f ~/.rvm/scripts/rvm ]; then
-  . ~/.rvm/scripts/rvm
-fi
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 

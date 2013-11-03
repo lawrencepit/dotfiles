@@ -12,9 +12,6 @@ IRB.conf[:AUTO_INDENT]=true
 require 'pp'
 
 require 'rubygems'
-require 'wirble'
-Wirble.init
-Wirble.colorize
 
 # http://ozmm.org/posts/time_in_irb.html
 def time(times = 1)
@@ -41,13 +38,6 @@ end
 require 'logger'
 if ENV.include?('RAILS_ENV') && !Object.const_defined?('RAILS_DEFAULT_LOGGER')
   Object.const_set('RAILS_DEFAULT_LOGGER', Logger.new(STDOUT))
-end
-
-def ht
-  @howard_tanner ||= Person.find_by_account_id_and_primary_email(5, 'howard.tanner@widget.com')
-end
-def go(person = ht)
-  UserSession.assume(person, "127.0.0.1")
 end
 
 def ppp(object)
