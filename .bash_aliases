@@ -1,4 +1,4 @@
-alias wget='curl -L -O'
+alias wget='curl --retry 999 --retry-delay 120 --retry-max-time 0 -L -C - -O'
 
 # Shortcuts
 alias d="cd ~/Dropbox"
