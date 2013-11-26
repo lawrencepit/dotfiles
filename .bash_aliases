@@ -10,7 +10,7 @@ alias be='bundle exec'
 alias gems='cd $GEM_HOME'
 
 alias g='git'
-alias ga='git add'
+alias ga='git add --all'
 alias gb='git branch'
 alias gba='git branch -a'
 alias gca='git commit -a -v'
